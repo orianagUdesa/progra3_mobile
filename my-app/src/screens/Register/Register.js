@@ -1,4 +1,4 @@
-import react, { Component } from 'react';
+import react, { Component } from 'react-native';
 import { db, auth } from '../firebase/Config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 
@@ -11,6 +11,7 @@ class Register extends Component {
             password:''
         }
     }
+  
     componentDidMount(){
         console.log("Chequear si el usuario está loguado en firebase.");
         // Puse la funcionalidad aquí para probarla. No necesariamente debe ir en este componente.
@@ -26,11 +27,10 @@ class Register extends Component {
 
     }
 
-
     register (email, pass, userName){                                                     //dentro de aca esta la conexion con firebase
         auth.createUserWithEmailAndPassword(email, pass)                        //metodo de firebase para crear un usuario    
-            .then(()=>{
-                console.log('Registrado ok');
+            .then((response)=>{
+                console.log('Registrado ok', response);
                 
                 db.collection('users').add({
                     owner: auth.currentUser.email,
