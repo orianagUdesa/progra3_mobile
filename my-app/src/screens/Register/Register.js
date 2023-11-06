@@ -1,5 +1,5 @@
 import react, { Component } from 'react';
-import { auth } from '../firebase/Config';
+import { db, auth } from '../firebase/Config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 
 class Register extends Component {
@@ -11,11 +11,35 @@ class Register extends Component {
             password:''
         }
     }
+    componentDidMount(){
+        console.log("Chequear si el usuario está loguado en firebase.");
+        // Puse la funcionalidad aquí para probarla. No necesariamente debe ir en este componente.
 
-    register (email, pass){                                                     //dentro de aca esta la conexion con firebase
+        auth.onAuthStateChanged( user => {
+            console.log(user)
+            if( user ){
+                //Redirigir al usuario a la home del sitio.
+                this.props.navigation.navigate('Home')
+            }
+
+        } )
+
+    }
+
+
+    register (email, pass, userName){                                                     //dentro de aca esta la conexion con firebase
         auth.createUserWithEmailAndPassword(email, pass)                        //metodo de firebase para crear un usuario    
             .then(()=>{
-                console.log('Registrado ok');                                  //cuando firebase responde sin error, response me muestra ol con los datos que ingreso y +++
+                console.log('Registrado ok');
+                
+                db.collection('users').add({
+                    owner: auth.currentUser.email,
+                    userName: userName,
+                    cratedAt: Date.now(),
+
+                })
+                
+                .then( res => console.log(res))                                                            //cuando firebase responde sin error, response me muestra ol con los datos que ingreso y +++
             })    
             .catch( error => {
                 console.log(error);                                            // cuando firebase detecta un error
@@ -48,7 +72,7 @@ class Register extends Component {
                     secureTextEntry={true}
                     value={this.state.password}
                 />
-                <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password)}>
+                <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName)}>
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}> 

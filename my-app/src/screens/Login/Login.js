@@ -20,7 +20,7 @@ class Login extends Component {
                 //ir response != null? limpiar los estados, value = null??
 
                 //Redirigir al usuario a la home del sitio cuando el login sea correcto
-                this.props.navigation.navigate('Home')
+                this.props.navigation.navigate('Menu')
 
             })
             .catch( error => {
