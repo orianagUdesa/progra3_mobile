@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+}
+header {
+    display:flex;
+    align-items: center;
+    height: 110px;
+    width: 100%;
+    margin-bottom: 5em;
+    padding: 0px 36px;
+    border-bottom: 1px solid #eee;
+}
+.contlogo {
+    width: 15%;
+}
+
+.logoImageContainer{
+    display: flex;
+    align-items: center;
+    min-width: 150px;
+    height: 90px;
+    margin-right: 32px;
+}
+
+.logoImage{
+    background-color: transparent;
+    background-image: url(https://static-assets.bamgrid.com/product/disneyplus/images/logo.1a56f51c764022ee769c91d894d44326.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: auto;
+    min-height: 90px;
+    min-width: 150px;
+    width: auto;
+}
+.logo {
+    width: 75%;
+}
+.navegacion {
+    width: 65%;
+}
+ul {
+    display: flex;
+    flex-direction: row;
+}
+.lista {
+    list-style: none;
+    text-decoration: none;
+    color: white;
+}
+.formulario {
+    width: 20%;
+    border-radius: 9px;
+}
+.errorBuscador {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 13px;
+}

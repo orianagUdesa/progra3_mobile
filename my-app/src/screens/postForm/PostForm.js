@@ -1,4 +1,4 @@
-import react, { Component } from 'react-native';
+import react, { Component } from 'react';
 import { db, auth } from '../firebase/Config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 
@@ -8,6 +8,17 @@ class PostForm extends Component {
         this.state={
             textoPost: '',
         }
+    }
+
+    crearPost(owner, textoPost, createdAt){
+        //Crear la colección Users
+        db.collection('posts').add({
+            owner: owner, //auth.currentUser.email,
+            textoPost: textoPost, //this.state.textoPost,
+            createdAt: createdAt //Date.now(), 
+        })
+        .then( res => console.log(res))
+        .catch( e => console.log(e))
     }
 
     render(){
@@ -21,7 +32,7 @@ class PostForm extends Component {
                     keyboardType='default'
                     value={this.state.textoPost}
                     />
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, Date.now())}>
                     <Text style={styles.textButton}>Postear</Text>    
                 </TouchableOpacity>
             </View>
