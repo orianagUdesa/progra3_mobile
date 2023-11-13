@@ -2,11 +2,11 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { auth } from './src/screens/firebase/Config';
+import { auth } from './src/firebase/Config';
 import Register from './src/screens/Register/Register'
 import Login from './src/screens/Login/Login'
 import Home from './src/screens/Home/Home';
-import Menu from './src/Components/Menu/menu';
+import Menu from './src/Components/Menu/Menu';
 
 
 const Stack = createNativeStackNavigator();

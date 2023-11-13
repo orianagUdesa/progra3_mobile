@@ -1,7 +1,7 @@
-import react, { Component } from 'react';
+import React, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from 'react-native';
-import { db, auth } from '../../firebase/config';
-import firebase from 'firebase';
+import { db, auth } from '../../firebase/Config';
+
 
 class Post extends Component {
     constructor(props){
