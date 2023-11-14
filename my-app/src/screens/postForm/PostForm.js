@@ -9,7 +9,7 @@ class PostForm extends Component {
             textoPost: '',
         }
     }
-
+    //crearPost es un método que nos permite emular un "formulario"
     crearPost(owner, textoPost, createdAt){
         //Crear la colección Users
         db.collection('posts').add({

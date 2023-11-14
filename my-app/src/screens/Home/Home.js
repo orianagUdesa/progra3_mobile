@@ -10,7 +10,7 @@ class Home extends Component {
             listaPost: [],
         }
     }
-
+// apenas se ejecute la home, se carga component y trae los post
     componentDidMount(){
         //Traer datos
         db.collection('posts').onSnapshot(
