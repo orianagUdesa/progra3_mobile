@@ -54,11 +54,11 @@ class Post extends Component {
     render(){
         console.log(this.props);
         return(
-            <View>
-                <Text>Datos del Post</Text>
-                <Text>Email: {this.props.infoPost.datos.owner}</Text>
-                <Text>Texto: {this.props.infoPost.datos.textoPost}</Text>
-                <Text>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
+            <View style={styles.post}>
+                <Text style={styles.texto}>Datos del Post</Text>
+                <Text style={styles.texto}>Email: {this.props.infoPost.datos.owner}</Text>
+                <Text style={styles.texto}>Texto: {this.props.infoPost.datos.textoPost}</Text>
+                <Text style={styles.likes}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
                 {this.state.like ?
                 <TouchableOpacity onPress={()=>this.unLike()}>
                     Quitar like
@@ -76,5 +76,20 @@ class Post extends Component {
     }
 
 }
+
+const styles = StyleSheet.create({
+    post:{
+        textAlign: 'right',
+        fontFamily: 'Roboto',
+        borderStyle:'solid',
+    },
+    texto:{
+        textAlign: 'center',
+    },
+    likes:{
+        textAlign:'right',
+    }
+
+})
 
 export default Post;
