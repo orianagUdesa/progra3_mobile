@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { auth } from '../../firebase/Config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+
+
 class Login extends Component {
     constructor(){
         super()
         this.state={
             email:'',
-            password:''
+            password:'',
         }
+    }
+
+    componentDidMount(){
+        auth.onAuthStateChanged( user => {
+            if(user){
+                this.setState({email: auth.currentUser.email})
+                this.setState({password: auth.currentUser.password})
+                this.login(this.state.email,this.state.password)
+            }
+        })
     }
 
     login (email, pass){
