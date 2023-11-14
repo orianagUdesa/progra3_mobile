@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
-import { auth, db } from '../../firebase/config';
+import { auth, db } from '../../firebase/Config';
+
 
 class Profile extends Component {
     constructor(){

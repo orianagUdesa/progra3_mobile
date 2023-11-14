@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View, Text, FlatList} from 'react-native';
 import {db, auth} from "../../firebase/Config";
 import Post from "../../Components/Post/Post"
+import Profile from '../MiPerfil/Profile';
 
 class Home extends Component {
     constructor(){
@@ -46,7 +47,7 @@ class Home extends Component {
                 <TouchableOpacity  onPress={()=>this.logout()}>
                     <Text>Logout</Text>
                 </TouchableOpacity>
-                <Text>Lista de Posts</Text>
+                <Text>Posts</Text>
                 {
                     this.state.listaPost.length === 0 
                     ?
