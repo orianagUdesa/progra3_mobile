@@ -26,11 +26,12 @@ class Post extends Component {
         db.collection("posts").doc(this.props.infoPost.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
-        .then(
+        .then( res => {
             this.setState({
-                like: true
+                like: true,
+                cantidadDeLikes: this.props.infoPost.datos.likes.length
             })
-        )
+        })
         .catch( e => console.log(e))
         
     }
@@ -39,11 +40,12 @@ class Post extends Component {
         db.collection("posts").doc(this.props.infoPost.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
-        .then(
+        .then( res => {
             this.setState({
-                like: false
+                like: false,
+                cantidadDeLikes: this.props.infoPost.datos.likes.length
             })
-        )
+        })
         .catch( e => console.log(e))
 
     }
@@ -56,7 +58,7 @@ class Post extends Component {
                 <Text>Datos del Post</Text>
                 <Text> Email: {this.props.infoPost.datos.owner}</Text>
                 <Text>Texto: {this.props.infoPost.datos.textoPost}</Text>
-                <Text>cantidad de likes: {this.state.cantidadDeLikes}</Text>
+                <Text>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
                 {this.state.like ?
                 <TouchableOpacity onPress={()=>this.unLike()}>
                     Quitar like
