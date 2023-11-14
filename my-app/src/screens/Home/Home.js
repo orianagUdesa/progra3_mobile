@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, Text, FlatList} from 'react-native';
+import { TouchableOpacity, View, Text, FlatList, StyleSheet} from 'react-native';
 import {db, auth} from "../../firebase/Config";
 import Post from "../../Components/Post/Post"
 import Profile from '../MiPerfil/Profile';
@@ -42,11 +42,8 @@ class Home extends Component {
 
     render(){
         return(
-            <View >
-                <Text>Home mimi!</Text>
-                <TouchableOpacity  onPress={()=>this.logout()}>
-                    <Text>Logout</Text>
-                </TouchableOpacity>
+            <View style={styles.mainContainer}>
+                <Text style={styles.title}>Hola mimi!</Text>
                 <Text>Posts</Text>
                 {
                     this.state.listaPost.length === 0 
@@ -59,13 +56,30 @@ class Home extends Component {
                         renderItem={ ({item}) => <Post infoPost = { item } /> }
                     />
                 }
-                
+                <TouchableOpacity  onPress={()=>this.logout()}>
+                    <Text style={styles.logout}>Logout</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
 
+const styles= StyleSheet.create({
+    title: {
+        textAlign: 'center',
+        fontSize: '26px',
+    },
+    mainContainer: {
+        flex: 1,
+        borderRadius: 6,
+        marginHorizontal: 20,
+        marginVertical: 5
+    },
+    logout:{
+        fontSize: '16px',
 
+    }
+})
 
 
 export default Home;

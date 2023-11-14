@@ -54,7 +54,7 @@ class Post extends Component {
         return(
             <View>
                 <Text>Datos del Post</Text>
-                <Text> Email: {this.props.infoPost.datos.owner}</Text>
+                <Text>Email: {this.props.infoPost.datos.owner}</Text>
                 <Text>Texto: {this.props.infoPost.datos.textoPost}</Text>
                 <Text>cantidad de likes: {this.state.cantidadDeLikes}</Text>
                 {this.state.like ?
