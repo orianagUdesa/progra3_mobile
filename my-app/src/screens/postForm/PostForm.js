@@ -10,32 +10,49 @@ class PostForm extends Component {
         }
     }
     //crearPost es un método que nos permite emular un "formulario"
-    crearPost(owner, textoPost, createdAt){
+    crearPost(owner, textoPost, createdAt, img){
         //Crear la colección Users
         db.collection('posts').add({
             owner: owner, //auth.currentUser.email,
             textoPost: textoPost, //this.state.textoPost,
             createdAt: createdAt, //Date.now(), 
             likes: [],
+            comments: [],
+            fotoUrl: ''
         })
-        .then( res => console.log(res))
+        .then( res => 
+        console.log(res),
+        this.setState({
+            textoPost: '',
+            fotoUrl: ''
+        }),
+        this.props.navigation.navigate('Home')
+        )
         .catch( e => console.log(e))
+    }
+
+    traerUrlDeFoto(url){
+        this.setState({
+            fotoUrl:url
+        })
     }
 
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>New Post</Text>
+                <Text>New Post</Text>                    
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({textoPost: text})}
                     placeholder='Escribir...'
                     keyboardType='default'
-                    value={this.state.textoPost}
+                    value={this.state.textoPost}         /* falta el campo de fotoUrl pero se hace con camera  */
                     />
-                <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, Date.now())}>
-                    <Text style={styles.textButton}>Postear</Text>    
-                </TouchableOpacity>
+                {(this.state.fotoUrl === '' 
+                ? <Text>Requiere foto para postear</Text>
+                : <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, Date.now(), this.state.fotoUrl)}>
+                    <Text style={styles.textButton}>Post</Text>    
+                </TouchableOpacity>)}
             </View>
         )
     }
