@@ -37,6 +37,14 @@ class MyCamera extends Component{
         })
         .catch(e => console.log(e))
     }
+    cancelar(){
+        console.log("Cancelando...");
+        this.setState({
+            urlInternaFoto:'',
+            mostrarCamara: true,
+        })
+    }
+
 
     guardarFoto(){
         fetch(this.state.urlInternaFoto)
@@ -62,57 +70,96 @@ class MyCamera extends Component{
     render(){
         return(
             <View style={ styles.container}>
-                {
-                    this.state.permisos ? //si es verdadero:
-                        this.state.mostrarCamara == false?
-                        //preview de la foto
-                        <React.Fragment>
-                        <Image
-                            source = {{uri: this.state.urlInternaFoto}}
-                            style = { styles.cameraBody }
-                        />
-                        <TouchableOpacity onPress={()=> this.guardarFoto()}>
-                        < Text>Aceptar</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                        <Text>Cancelar</Text>
-                        </TouchableOpacity>
-                        </React.Fragment>
 
-                        :
-                        //camara.
+                {
+                    this.state.permisos ?
+                        this.state.mostrarCamara === false ?
+                        //Preview
                         <React.Fragment>
+                            <Image 
+                                source={{uri:this.state.urlInternaFoto}}
+                                style={ styles.cameraBody }
+                            />
+                            {/* Corregir estilos para que se vea la imagen. Resuelto ✅.*/}
+                            {/* Corregir estilos para que los botones desaparezcan una vez que el usuario aceptó o canceló el preview. Resuelto ✅ */}
+                            <View style={styles.confirm}>
+                                <TouchableOpacity style={styles.cancelButton} onPress={()=>this.cancelar()}>
+                                    <Text style = { styles.textButton }>Cancelar</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.confirmButton} onPress={ () => this.guardarFoto() }>
+                                    <Text style = { styles.textButton }>Aceptar</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </React.Fragment>
+                        
+                        :
+                        //Cámara.
+                        <React.Fragment>
+                        {/* Corregir estilos para que se vea bien la cámara */}
                             <Camera 
-                            type= { Camera.Constants.Type.front}
-                            ref = {metodosDeCamara => this.metodosDeCamara = metodosDeCamara} 
-                            style = { styles.cameraBody }
-                            /> 
-                            <TouchableOpacity style = { styles.button } onPress={() => this.SacarFoto()}>
-                                <Text>Sacar foto</Text>
+                                type={Camera.Constants.Type.front}
+                                ref= { metodosDeCamara => this.metodosDeCamara = metodosDeCamara}
+                                style = { styles.cameraBody }
+                            />
+                            <TouchableOpacity  style = { styles.button } onPress={()=> this.SacarFoto()}>
+                                <Text style = { styles.textButton }>Sacar Foto</Text>
                             </TouchableOpacity>
                         </React.Fragment>
-                    : //si es falso
-                    <Text>La camara no tiene permisos</Text>
+                    :
+                    <Text>La cámara no tiene permisos</Text>
+
                 }
-
-
             </View>
         )
     }
 
+
+
 }
+
 
 const styles = StyleSheet.create({
     container:{
-        //flex:1,
+        height:"45vh",
+        
     },
     cameraBody: {
-        flex:7
+      marginTop: 20,
+      marginBottom: 10,
+      height:"40vh",
     },
     button:{
-        flex:2,
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+        borderWidth:1,
+        borderStyle: 'solid',
+        borderColor: '#28a745'
+    },
+    textButton:{
+        color: '#fff',
+        textAlign: "center"
+    },
+    confirm:{
+        flexDirection:"row",
+        justifyContent: "space-between"
+    },
+    confirmButton:{
+        backgroundColor:'#28a745',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
+    },
+    cancelButton:{
+        backgroundColor:'#dc3545',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius:4, 
     }
 })
-
 
 export default MyCamera;
