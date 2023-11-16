@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+
 import Home from '../../screens/Home/Home';
 import PostForm from '../../screens/postForm/postForm';
 import Profile from '../../screens/MiPerfil/Profile';
