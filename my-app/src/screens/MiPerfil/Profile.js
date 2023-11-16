@@ -80,7 +80,7 @@ class Profile extends Component {
                 <FlatList 
                         data= {this.state.userPost}
                         keyExtractor={ unPost => unPost.id }
-                        renderItem={ ({item}) => <PostEnProfile infoPost = { item } /> }  /*hay que hacerlo renderizar */
+                        renderItem={ ({item}) => <PostEnProfile posts = { item } /> }  /*hay que hacerlo renderizar */
                     />
             }
     
