@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
 import { db, auth } from '../../firebase/Config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import MyCamera from '../../components/MyCamera/My-Camera';
 
 class PostForm extends Component {
     constructor(){
         super()
         this.state={
             textoPost: '',
+            fotoUrl: '',
         }
     }
+
     //crearPost es un método que nos permite emular un "formulario"
-    crearPost(owner, textoPost, createdAt){
+    crearPost(owner, textoPost, fotoUrl, createdAt){
         //Crear la colección Users
         db.collection('posts').add({
             owner: owner, //auth.currentUser.email,
             textoPost: textoPost, //this.state.textoPost,
+            fotoUrl: fotoUrl,
             createdAt: createdAt, //Date.now(), 
             likes: [],
         })
         .then( res => console.log(res))
         .catch( e => console.log(e))
     }
+    
+    traerUrlDeFoto(url){
+        this.setState({
+            fotoUrl: url
+        })
+    }
 
     render(){
         return(
             <View style={styles.formContainer}>
                 <Text>New Post</Text>
+                <MyCamera style={styles.camera} traerUrlDeFoto = {url => this.traerUrlDeFoto(url)}/> 
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({textoPost: text})}
@@ -33,7 +44,7 @@ class PostForm extends Component {
                     keyboardType='default'
                     value={this.state.textoPost}
                     />
-                <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, Date.now())}>
+                <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, this.state.fotoUrl, Date.now())}>
                     <Text style={styles.textButton}>Postear</Text>    
                 </TouchableOpacity>
             </View>
@@ -68,6 +79,9 @@ const styles = StyleSheet.create({
     },
     textButton:{
         color: '#fff'
+    },
+    camera:{
+        height: 400,
     }
 
 })
