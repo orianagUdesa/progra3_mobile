@@ -8,12 +8,12 @@ class PostEnProfile extends Component {
         super(props)
         this.state={
             like: false,
-            cantidadDeLikes: this.props.infoPost.datos.likes.length
+            cantidadDeLikes: this.props.posts.datos.likes.length
         }
     }
 
     componentDidMount(){
-        if(this.props.infoPost.datos.likes.includes(auth.currentUser.email)){  /* para ver si el post ya esta likeado */
+        if(this.props.posts.datos.likes.includes(auth.currentUser.email)){  /* para ver si el post ya esta likeado */
             this.setState({
                 like: true
             })
@@ -24,13 +24,13 @@ class PostEnProfile extends Component {
         //El post tendría que guardar una propiedad like con un array de los usuario que lo likearon.
     
         //update en base de datos
-        db.collection('posts').doc(this.props.infoPost.id).update({
+        db.collection('posts').doc(this.props.posts.id).update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then( res => {
             this.setState({
                 like: true,
-                cantidadDeLikes: this.props.infoPost.datos.likes.length
+                cantidadDeLikes: this.props.posts.datos.likes.length
             })
         })
         .catch( e => console.log(e))
@@ -40,20 +40,20 @@ class PostEnProfile extends Component {
     
     unLike(){
         //Quitar del array de likes al usario que está mirando el post.
-        db.collection('posts').doc(this.props.infoPost.id).update({
+        db.collection('posts').doc(this.props.posts.id).update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
         .then( res => {
             this.setState({
                 like: false,
-                cantidadDeLikes: this.props.infoPost.datos.likes.length
+                cantidadDeLikes: this.props.posts.datos.likes.length
             })
         })
         .catch( e => console.log(e))
        }
 
     deletePost(){
-        db.collection('posts').doc(this.props.infoPost.id).delete()
+        db.collection('posts').doc(this.props.posts.id).delete()
         .then( res => {
             console.log('Eliminado');
         })
@@ -63,7 +63,7 @@ class PostEnProfile extends Component {
     render(){
         return(
             <View>
-            <Text>{this.props.infoPost.datos.textoPost}</Text>
+            <Text>{this.props.posts.datos.textoPost}</Text>
             <Text>Likes: {this.state.cantidadDeLikes}</Text>
 
             {this.state.like ? 
@@ -72,7 +72,7 @@ class PostEnProfile extends Component {
                 <TouchableOpacity onPress={()=>this.likear()}></TouchableOpacity>
             }
 
-            {auth.currentUser.email == this.props.infoPost.datos.owner && 
+            {auth.currentUser.email == this.props.posts.datos.owner && 
                 <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
                     <Text>Eliminar post</Text>
                 </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../../firebase/Config';
-import PostEnProfile from '../../Components/PostEnProfile/PostEnProfile';
+import PostEnProfile from '../PostEnProfile/PostEnProfile';
 
 
 class Profile extends Component {
