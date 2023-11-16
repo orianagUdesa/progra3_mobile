@@ -7,8 +7,12 @@ import Register from './src/screens/Register/Register'
 import Login from './src/screens/Login/Login'
 import Home from './src/screens/Home/Home';
 import Profile from './src/screens/MiPerfil/Profile';
+<<<<<<< HEAD
 import SearchResults from './src/screens/SearchResults/SearchResults';
+=======
+>>>>>>> 181cb11239190d474fb6c47326040e13d299b8d0
 import Menu from '../my-app/src/components/Menu/Menu';
+import SearchResults from './src/screens/SearchResults/SearchResults';
 
 
 const Stack = createNativeStackNavigator();

@@ -80,24 +80,24 @@ class Post extends Component {
                 <Text style={styles.likes}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
                 {this.state.like ?
                 <TouchableOpacity onPress={()=>this.unLike()}>
-                    Quitar like
+                    <Text>Quitar like</Text>
                 </TouchableOpacity>
                 :
                 <TouchableOpacity onPress={()=> this.likear()}>
-                    Like
+                    <Text>Like</Text>
                 </TouchableOpacity>
                 }
                 {
                     this.props.posts.datos.comments ?
                         <FlatList
                         data={this.props.posts.datos.comments}
-                        keyExtractor={post => post.createdAt.toString()}
+                        keyExtractor={post => post.createdAt}
                         renderItem={({item})=> <Text>{item.author}: {item.commentText}</Text>}
                         /> :
                         <Text></Text>
                 }
                 {/* Aca agregamos un nuevo comentario */}
-                <View>
+            <View>
                     <TextInput keyboardType='default'
                                 placeholder='Escribí tu comentario'
                                 onChangeText={(text)=>{this.setState({comment: text})}}
@@ -107,7 +107,7 @@ class Post extends Component {
                     <TouchableOpacity onPress={()=>this.crearComment()}>
                         <Text>Comentar</Text>
                     </TouchableOpacity>
-                </View>
+            </View>
                 
   
             </View>
