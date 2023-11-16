@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../../firebase/Config';
+import PostEnProfile from '../../Components/PostEnProfile/PostEnProfile';
 
 
 class Profile extends Component {
@@ -79,7 +80,7 @@ class Profile extends Component {
                 <FlatList 
                         data= {this.state.userPost}
                         keyExtractor={ unPost => unPost.id }
-                        // renderItem={ ({item}) => <PostInProfile infoPost = { item } /> }  /*hay que hacerlo renderizar */
+                        renderItem={ ({item}) => <PostEnProfile infoPost = { item } /> }  /*hay que hacerlo renderizar */
                     />
             }
     
