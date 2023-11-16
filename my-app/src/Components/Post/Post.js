@@ -88,7 +88,7 @@ class Post extends Component {
                 </TouchableOpacity>
                 }
                 {
-                    this.props.infoPost.datos.comments ?
+                    this.props.posts.datos.comments ?
                         <FlatList
                         data={this.props.posts.datos.comments}
                         keyExtractor={post => post.createdAt.toString()}
