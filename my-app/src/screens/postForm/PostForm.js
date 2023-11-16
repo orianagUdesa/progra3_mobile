@@ -14,11 +14,7 @@ class PostForm extends Component {
     
 
     //crearPost es un método que nos permite emular un "formulario"
-<<<<<<< HEAD
-    crearPost(owner, textoPost, createdAt,fotoUrl, img){
-=======
     crearPost(owner, textoPost, fotoUrl, createdAt){
->>>>>>> 181cb11239190d474fb6c47326040e13d299b8d0
         //Crear la colección Users
         db.collection('posts').add({
             owner: owner, //auth.currentUser.email,
@@ -52,11 +48,7 @@ class PostForm extends Component {
         return(
             <View style={styles.formContainer}>
                 <Text>New Post</Text>
-<<<<<<< HEAD
-                <MyCamera style={styles.camera} traerUrlDeFoto = {url => this.traerUrlDeFoto(url)}/>                  
-=======
                 <MyCamera style={styles.camera} traerUrlDeFoto = {url => this.traerUrlDeFoto(url)}/> 
->>>>>>> 181cb11239190d474fb6c47326040e13d299b8d0
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({textoPost: text})}
@@ -67,14 +59,6 @@ class PostForm extends Component {
                 <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, this.state.fotoUrl, Date.now())}>
                     <Text style={styles.textButton}>Postear</Text>    
                 </TouchableOpacity>
-<<<<<<< HEAD
-                {(this.state.fotoUrl === '' 
-                ? <Text>Requiere foto para postear</Text>
-                : <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, this.state.fotoUrl,Date.now())}>
-                    <Text style={styles.textButton}>Post</Text>    
-                </TouchableOpacity>)}
-=======
->>>>>>> 181cb11239190d474fb6c47326040e13d299b8d0
             </View>
         )}}
     

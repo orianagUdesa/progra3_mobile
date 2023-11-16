@@ -117,7 +117,6 @@ class MyCamera extends Component{
 
 }
 
-
 const styles = StyleSheet.create({
     container:{
         height:"45vh",

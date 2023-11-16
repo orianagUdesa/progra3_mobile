@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from 'react-native';
+import { Image } from 'react-native';
 import { db, auth } from '../../firebase/Config';
 import firebase from 'firebase';
 
@@ -77,6 +78,10 @@ class Post extends Component {
                 <Text style={styles.texto}>Datos del Post</Text>
                 <Text style={styles.texto}>Email: {this.props.posts.datos.owner}</Text>
                 <Text style={styles.texto}>Texto: {this.props.posts.datos.textoPost}</Text>
+                <Image 
+                    source={{uri:this.props.posts.datos.fotoUrl}}
+                    style={ styles.estiloimagen }
+                />
                 <Text style={styles.likes}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
                 {this.state.like ?
                 <TouchableOpacity onPress={()=>this.unLike()}>
@@ -127,6 +132,12 @@ const styles = StyleSheet.create({
     },
     likes:{
         textAlign:'right',
+    },
+    estiloimagen:{
+        marginTop: 20,
+        marginBottom: 10,
+        height:300,
+        width:"100%"
     }
 
 })
