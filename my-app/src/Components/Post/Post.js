@@ -70,48 +70,56 @@ class Post extends Component {
     }
 
 
-    render(){
+    render() {
         console.log(this.props);
-        return(
-            <View style={styles.post}>
-                <Text style={styles.texto}>Datos del Post</Text>
-                <Text style={styles.texto}>Email: {this.props.posts.datos.owner}</Text>
-                <Text style={styles.texto}>Texto: {this.props.posts.datos.textoPost}</Text>
-                <Text style={styles.likes}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
-                {this.state.like ?
-                <TouchableOpacity onPress={()=>this.unLike()}>
-                    <Text>Quitar like</Text>
-                </TouchableOpacity>
-                :
-                <TouchableOpacity onPress={()=> this.likear()}>
-                    <Text>Like</Text>
-                </TouchableOpacity>
-                }
-                {
-                    this.props.posts.datos.comments ?
-                        <FlatList
-                        data={this.props.posts.datos.comments}
-                        keyExtractor={post => post.createdAt}
-                        renderItem={({item})=> <Text>{item.author}: {item.commentText}</Text>}
-                        /> :
-                        <Text></Text>
-                }
-                {/* Aca agregamos un nuevo comentario */}
+        const { datos } = this.props.posts;
+        return (
+          <View style={styles.post}>
+            <Text style={styles.texto}>Datos del Post</Text>
+            <Text style={styles.texto}>Email: {datos.owner}</Text>
+            <Text style={styles.texto}>Texto: {datos.textoPost}</Text>
+            <Text style={styles.likes}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
+      
+            {this.state.like ? (
+              <TouchableOpacity onPress={() => this.unLike()}>
+                <Text>Quitar like</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={() => this.likear()}>
+                <Text>Like</Text>
+              </TouchableOpacity>
+            )}
+      
+            {datos.comments && datos.comments.length > 0 ? (
+              <FlatList
+                data={datos.comments}
+                keyExtractor={(comment) => comment.createdAt.toString()}
+                renderItem={({ item }) => (
+                  <Text>
+                    <Text style={styles.commentAuthor}>{item.autor}:</Text> {item.commentText}
+                  </Text>
+                )}
+              />
+            ) : (
+              <Text>Aún no hay comentarios</Text>
+            )}
+      
             <View>
-                    <TextInput keyboardType='default'
-                                placeholder='Escribí tu comentario'
-                                onChangeText={(text)=>{this.setState({comment: text})}}
-                                multiline
-                                value={this.state.comment}
-                    />
-                    <TouchableOpacity onPress={()=>this.crearComment()}>
-                        <Text>Comentar</Text>
-                    </TouchableOpacity>
+              <TextInput
+                keyboardType="default"
+                placeholder="Escribí tu comentario"
+                onChangeText={(text) => {
+                  this.setState({ comment: text });
+                }}
+                multiline
+                value={this.state.comment}
+              />
+              <TouchableOpacity onPress={() => this.crearComment()}>
+                <Text>Comentar</Text>
+              </TouchableOpacity>
             </View>
-                
-  
-            </View>
-        )
+          </View>
+        );
     }
 
 }
@@ -127,8 +135,10 @@ const styles = StyleSheet.create({
     },
     likes:{
         textAlign:'right',
-    }
-
+    },
+    commentAuthor: {
+        fontWeight: 'bold', // Puedes ajustar este estilo según tus preferencias
+      }
 })
 
 export default Post;

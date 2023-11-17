@@ -42,7 +42,6 @@ class MyCamera extends Component{
         fetch(this.state.urlInternaFoto)
         .then(res => res.blob()) //recupera datos binarios(foto), procesa la foto y guarda eso en image(agajo parametro de la funcion)
         .then(image =>{
-
             const ruta = storage.ref(`photos/${Date.now()}.jpg`)//si no existe la carpeta fotos la crea! que cree un nombre en base a la date de la pic (que guarde la pic ak)
             ruta.put(image)
             .then(()=> {
