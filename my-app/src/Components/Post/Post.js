@@ -76,10 +76,9 @@ class Post extends Component {
         const { datos } = this.props.posts;
         return (
           <View style={styles.post}>
-            <Text style={styles.texto}>Datos del Post</Text>
-            <Text style={styles.texto}>Email: {datos.owner}</Text>
-            <Text style={styles.texto}>Texto: {datos.textoPost}</Text>
-            <Text style={styles.likes}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
+            <Text style={styles.texto}>Publicado por: {datos.owner}</Text>
+            <Text style={styles.texto}>{datos.textoPost}</Text>
+            <Text style={styles.likes}>Likes: {this.state.cantidadDeLikes}</Text>
       
             {this.state.like ? (
               <TouchableOpacity onPress={() => this.unLike()}>
@@ -105,7 +104,7 @@ class Post extends Component {
               <Text>Aún no hay comentarios</Text>
             )}
       
-            <View>
+            <View style={styles.commentButtonContainer}>
               <TextInput
                 keyboardType="default"
                 placeholder="Escribí tu comentario"
@@ -115,8 +114,10 @@ class Post extends Component {
                 multiline
                 value={this.state.comment}
               />
-              <TouchableOpacity onPress={() => this.crearComment()}>
-                <Text>Comentar</Text>
+              <TouchableOpacity 
+                style={styles.commentButton} 
+                onPress={() => this.crearComment()}>
+                <Text style={styles.commentButtonText}>Comentar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -126,27 +127,42 @@ class Post extends Component {
 }
 
 const styles = StyleSheet.create({
-    post:{
-        textAlign: 'right',
-        fontFamily: 'Roboto',
-        borderStyle:'solid',
-    },
-    texto:{
-        textAlign: 'center',
-    },
-    likes:{
-        textAlign:'right',
-    },
-    commentAuthor: {
-        fontWeight: 'bold', // Podemos ajustar este estilo según la app que tomemos de referencia, lo hice para que destaque
+    post: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 16,
+        marginVertical: 8,
       },
-    estiloimagen:{
-        marginTop: 20,
-        marginBottom: 10,
-        height:300,
-        width:"100%"
-    }
-
+      texto: {
+        fontSize: 16,
+        marginBottom: 8,
+      },
+      likes: {
+        fontSize: 14,
+        color: 'gray',
+        marginBottom: 8,
+      },
+      commentAuthor: {
+        fontWeight: 'bold',
+        marginRight: 4,
+      },
+      commentButtonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginTop: 8, // Espacio entre los comentarios y el botón
+      },
+      
+      commentButton: {
+        backgroundColor: '#333',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 10,
+      },
+      
+      commentButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+      },
 })
 
 export default Post;

@@ -43,7 +43,7 @@ class Home extends Component {
     render(){
         return(
             <View style={styles.mainContainer}>
-                <Text style={styles.title}>Hola mimi!</Text>
+                <Text style={styles.title}>VSCO inspiration</Text>
                 <Text>Posts</Text>
                 {
                     this.state.listaPost.length === 0 
@@ -68,16 +68,24 @@ const styles= StyleSheet.create({
     title: {
         textAlign: 'center',
         fontSize: '26px',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
     },
     mainContainer: {
         flex: 1,
         borderRadius: 6,
         marginHorizontal: 20,
-        marginVertical: 5
+        marginVertical: 5,
+        flex: 1,
+        backgroundColor: '#F7F7F7',
+        padding: 20,
     },
     logout:{
         fontSize: '16px',
-
+        color: 'blue',
+        marginTop: 16,
     }
 })
 

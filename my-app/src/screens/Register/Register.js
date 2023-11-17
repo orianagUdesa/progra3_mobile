@@ -83,7 +83,7 @@ class Register extends Component {
                     <Text style={styles.textButton}>Registrarse</Text>    
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}> 
-                    <Text>Ya tengo cuenta. Ir a login</Text>
+                    <Text style={styles.textButton}>Ya tengo cuenta. Ir a login</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -91,34 +91,36 @@ class Register extends Component {
 }
 
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal:10,
+    formContainer: {
+        paddingHorizontal: 20,
         marginTop: 20,
-    },
-    input:{
-        height:20,
-        paddingVertical:15,
-        paddingHorizontal: 10,
-        borderWidth:1,
+      },
+      input: {
+        height: 40,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderWidth: 1,
         borderColor: '#ccc',
-        borderStyle: 'solid',
-        borderRadius: 6,
-        marginVertical:10,
-    },
-    button:{
-        backgroundColor:'#DDDDDD',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        borderRadius: 8,
+        marginVertical: 10,
+      },
+      button: {
+        backgroundColor: '#ddd',
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderRadius: 8,
+        marginVertical: 10,
+        alignItems: 'center',
+      },
+      textButton: {
+        color: '#000',
+        fontWeight: 'bold',
+      },
+      loginText: {
+        marginTop: 10,
         textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#DDDDDD'
-    },
-    textButton:{
-        color: '#OOO'
-    }
-
+        color: '#000',
+      },
 })
 
 
