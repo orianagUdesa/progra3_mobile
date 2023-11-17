@@ -7,7 +7,7 @@ import Register from './src/screens/Register/Register'
 import Login from './src/screens/Login/Login'
 import Home from './src/screens/Home/Home';
 import Profile from './src/screens/MiPerfil/Profile';
-import Menu from './src/Components/Menu/Menu';
+import Menu from '../my-app/src/components/Menu/Menu';
 import SearchResults from './src/screens/SearchResults/SearchResults';
 
 
