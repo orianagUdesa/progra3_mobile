@@ -77,6 +77,10 @@ class Post extends Component {
         return (
           <View style={styles.post}>
             <Text style={styles.texto}>Publicado por: {datos.owner}</Text>
+            <Image 
+                    source={{uri:this.props.posts.datos.fotoUrl}}
+                    style={ styles.estiloimagen }
+                />
             <Text style={styles.texto}>{datos.textoPost}</Text>
             <Text style={styles.likes}>Likes: {this.state.cantidadDeLikes}</Text>
       
@@ -163,6 +167,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
       },
+      estiloimagen:{
+        marginTop: 20,
+        marginBottom: 10,
+        height:300,
+        width:"100%"
+    },
 })
 
 export default Post;
