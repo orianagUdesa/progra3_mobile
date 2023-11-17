@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from 'react-native';
+import { Image } from 'react-native';
 import { db, auth } from '../../firebase/Config';
 import firebase from 'firebase';
 
@@ -137,8 +138,15 @@ const styles = StyleSheet.create({
         textAlign:'right',
     },
     commentAuthor: {
-        fontWeight: 'bold', // Puedes ajustar este estilo según tus preferencias
-      }
+        fontWeight: 'bold', // Podemos ajustar este estilo según la app que tomemos de referencia, lo hice para que destaque
+      },
+    estiloimagen:{
+        marginTop: 20,
+        marginBottom: 10,
+        height:300,
+        width:"100%"
+    }
+
 })
 
 export default Post;

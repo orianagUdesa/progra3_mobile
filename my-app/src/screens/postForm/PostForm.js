@@ -11,6 +11,7 @@ class PostForm extends Component {
             fotoUrl: '',
         }
     }
+    
 
     //crearPost es un método que nos permite emular un "formulario"
     crearPost(owner, textoPost, fotoUrl, createdAt){
@@ -22,30 +23,26 @@ class PostForm extends Component {
             createdAt: createdAt, //Date.now(), 
             likes: [],
             comments: [],
-            fotoUrl: ''
+            
         })
         .then( res => 
         console.log(res),
         this.setState({
             textoPost: '',
-            fotoUrl: ''
+            fotoUrl: '',
         }),
         this.props.navigation.navigate('Home')
         )
         .catch( e => console.log(e))
     }
-    
+
     traerUrlDeFoto(url){
         this.setState({
             fotoUrl: url
         })
     }
+   
 
-    traerUrlDeFoto(url){
-        this.setState({
-            fotoUrl:url
-        })
-    }
 
     render(){
         return(
@@ -63,9 +60,10 @@ class PostForm extends Component {
                     <Text style={styles.textButton}>Postear</Text>    
                 </TouchableOpacity>
             </View>
-        )
-    }
-}
+        )}}
+    
+        
+
 
 const styles = StyleSheet.create({
     formContainer:{
