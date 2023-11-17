@@ -10,8 +10,12 @@ class Post extends Component {
         super(props)
         this.state={
             like: false,
+<<<<<<< HEAD
+            cantidadDeLikes: this.props.posts.datos.likes.length
+=======
             cantidadDeLikes: this.props.posts.datos.likes.length,
             comment: ''
+>>>>>>> ea5c2417ce933dc7eb72f93f0e9f98671698c744
         }
     }
 //primero le muestro al usuario todos los post que hay, ahi es donde decide si likear o no
@@ -73,6 +77,26 @@ class Post extends Component {
 
     render() {
         console.log(this.props);
+<<<<<<< HEAD
+        return(
+            <View style={styles.post}>
+                <Text style={styles.texto}>Datos del Post</Text>
+                <Text style={styles.texto}>Email: {this.props.posts.datos.owner}</Text>
+                <Text style={styles.texto}>Texto: {this.props.posts.datos.textoPost}</Text>
+                <Text style={styles.likes}>Cantidad de likes: {this.state.cantidadDeLikes}</Text>
+                {this.state.like ?
+                <TouchableOpacity onPress={()=>this.unLike()}>
+                    Quitar like
+                </TouchableOpacity>
+                :
+                <TouchableOpacity onPress={()=> this.likear()}>
+                    Like
+                </TouchableOpacity>
+                }
+                
+                
+  
+=======
         const { datos } = this.props.posts;
         return (
           <View style={styles.post}>
@@ -119,6 +143,7 @@ class Post extends Component {
                 onPress={() => this.crearComment()}>
                 <Text style={styles.commentButtonText}>Comentar</Text>
               </TouchableOpacity>
+>>>>>>> ea5c2417ce933dc7eb72f93f0e9f98671698c744
             </View>
           </View>
         );

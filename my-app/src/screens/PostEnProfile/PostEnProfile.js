@@ -8,12 +8,12 @@ class PostEnProfile extends Component {
         super(props)
         this.state={
             like: false,
-            cantidadDeLikes: this.props.posts.datos.likes.length
+            cantidadDeLikes: this.props.posts.likes.length
         }
     }
 
     componentDidMount(){
-        if(this.props.posts.datos.likes.includes(auth.currentUser.email)){  /* para ver si el post ya esta likeado */
+        if(this.props.posts.likes.includes(auth.currentUser.email)){  /* para ver si el post ya esta likeado */
             this.setState({
                 like: true
             })
@@ -30,7 +30,7 @@ class PostEnProfile extends Component {
         .then( res => {
             this.setState({
                 like: true,
-                cantidadDeLikes: this.props.posts.datos.likes.length
+                cantidadDeLikes: this.props.posts.likes.length
             })
         })
         .catch( e => console.log(e))
@@ -46,7 +46,7 @@ class PostEnProfile extends Component {
         .then( res => {
             this.setState({
                 like: false,
-                cantidadDeLikes: this.props.posts.datos.likes.length
+                cantidadDeLikes: this.props.posts.likes.length
             })
         })
         .catch( e => console.log(e))
@@ -63,7 +63,7 @@ class PostEnProfile extends Component {
     render(){
         return(
             <View>
-            <Text>{this.props.posts.datos.textoPost}</Text>
+            <Text>{this.props.posts.textoPost}</Text>
             <Text>Likes: {this.state.cantidadDeLikes}</Text>
 
             {this.state.like ? 
@@ -72,7 +72,7 @@ class PostEnProfile extends Component {
                 <TouchableOpacity onPress={()=>this.likear()}></TouchableOpacity>
             }
 
-            {auth.currentUser.email == this.props.posts.datos.owner && 
+            {auth.currentUser.email == this.props.posts.owner && 
                 <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
                     <Text>Eliminar post</Text>
                 </TouchableOpacity>
