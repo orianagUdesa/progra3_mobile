@@ -75,7 +75,7 @@ class Post extends Component {
 
     render() {
         console.log(this.props);
-        const { datos } = this.props.posts;
+        const { datos, navigation} = this.props.posts;
         return (
           <View style={styles.post}>
             <Text style={styles.texto}>Publicado por: {datos.owner}</Text>
@@ -98,16 +98,16 @@ class Post extends Component {
       
             {datos.comments && datos.comments.length > 0 ? (
               <FlatList
-                data={datos.comments}
-                keyExtractor={(comment) => comment.createdAt.toString()}
-                renderItem={({ item }) => (
+              data={datos.comments.slice().reverse().slice(0, 4)} //acá limitamos a solo ver los últimos 4 comentarios
+              keyExtractor={(comment) => comment.createdAt.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('OtherProfile', {user: item.autor})}>
                   <Text>
-                    <TouchableOpacity onPress={ () => navigation.navigate('OtherProfile')}>
-                    <Text style={styles.commentAuthor}>{item.autor}:</Text> {item.commentText}
-                    </TouchableOpacity>
+                    <Text style={styles.commentAuthor}>{item?.autor}:</Text> {item?.commentText}
                   </Text>
-                )}
-              />
+                </TouchableOpacity>
+              )}
+            />
             ) : (
               <Text>Aún no hay comentarios</Text>
             )}

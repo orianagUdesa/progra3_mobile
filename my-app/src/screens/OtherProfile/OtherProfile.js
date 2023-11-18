@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { TextInput,View, Text, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
 import { auth, db } from '../../firebase/Config';
-
+//import PostEnProfile from '../PostEnProfile/PostEnProfile';
+import Post from '../../Components/Post/Post';
+import SearchResults from '../SearchResults/SearchResults';
 
 
 class OtherProfile extends Component {
     constructor(){
         super()
         this.state={
-            user: item.autor,
+            user: this.props.route.params.owner,
             results: [],
             arrayPost: [],
         }
     }
 
     componentDidMount(){
-        db.collection('users').where('owner', '==', this.state.user).onSnapshot(
+        db.collection('users').where('owner', '==', auth.state.user).onSnapshot(
             docs =>{
                 let users = [];
                 docs.forEach( doc => {
@@ -29,7 +31,6 @@ class OtherProfile extends Component {
                 })
             }
         )
-        console.log(this.state.results)
 
         db.collection('posts').where('owner', '==', this.state.user).onSnapshot(
             posteos => {
@@ -65,30 +66,19 @@ class OtherProfile extends Component {
             <View style={styles.contenedorPrin}>
             <Text style={styles.title}>Profile</Text>
             <View>
+            <Text>Email:{auth.currentUser.email}</Text>
             <FlatList 
                     data= {this.state.results}
                     keyExtractor={ item => item.id.toString() }
                     renderItem={ ({item}) }
                 />
             </View>
+            <Text>My posts</Text>
             <Text>
                 {item.data.userName}, 
                 {item.data.owner}     
             </Text>
-            <Text>My posts</Text>
-            <View>
-                    <Text>cantidad de post { this.state.arrayPost.length}</Text>
-                    <FlatList 
-                        data= {this.state.arrayPost}
-                        keyExtractor={ unPost => unPost.id }
-                        renderItem={ ({item}) => 
-                            <View>
-                                <Post infoPost = { item } /> 
-                            </View>
-                            }
-                    />
-                   </View> 
-
+            
             <TouchableOpacity onPress={()=>this.logout()}>
                     <Text>Logout</Text>
             </TouchableOpacity>
