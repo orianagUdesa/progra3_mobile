@@ -127,17 +127,17 @@ const styles = StyleSheet.create({
         height: 500,
       },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor:'#ccc',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#ccc'
     },
     textButton:{
-        color: '#fff',
+        color: '#000',
         textAlign: "center"
     },
     confirm:{
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     confirmButton:{
-        backgroundColor:'#28a745',
+        backgroundColor:'#ccc',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',

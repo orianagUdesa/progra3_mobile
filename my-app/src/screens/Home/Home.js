@@ -56,8 +56,8 @@ class Home extends Component {
                         renderItem={ ({item}) => <Post posts = { item } /> }
                     />
                 }
-                <TouchableOpacity  onPress={()=>this.logout()}>
-                    <Text style={styles.logout}>Logout</Text>
+                <TouchableOpacity  onPress={()=>this.logout()} style={styles.buttonLogout}>
+                    <Text style={styles.textButtonLogout}>Logout</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -82,11 +82,19 @@ const styles= StyleSheet.create({
         backgroundColor: '#F7F7F7',
         padding: 20,
     },
-    logout:{
-        fontSize: '16px',
-        color: 'blue',
+    buttonLogout: {
+        backgroundColor: '#87CEEB',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
         marginTop: 16,
-    }
+        alignSelf: 'flex-start',
+    },
+    textButtonLogout: {
+        color: '#15297c',
+        fontSize: 16,
+    },
 })
 
 
