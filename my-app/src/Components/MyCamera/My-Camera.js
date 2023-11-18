@@ -79,8 +79,6 @@ class MyCamera extends Component{
                                 source={{uri:this.state.urlInternaFoto}}
                                 style={ styles.cameraBody }
                             />
-                            {/* Corregir estilos para que se vea la imagen. Resuelto ✅.*/}
-                            {/* Corregir estilos para que los botones desaparezcan una vez que el usuario aceptó o canceló el preview. Resuelto ✅ */}
                             <View style={styles.confirm}>
                                 <TouchableOpacity style={styles.cancelButton} onPress={()=>this.cancelar()}>
                                     <Text style = { styles.textButton }>Cancelar</Text>

@@ -11,7 +11,8 @@ class Post extends Component {
         this.state={
             like: false,
             cantidadDeLikes: this.props.posts.datos.likes.length,
-            comment: ''
+            comment: '',
+            lastFourComments: []
         }
     }
 //primero le muestro al usuario todos los post que hay, ahi es donde decide si likear o no
@@ -22,6 +23,9 @@ class Post extends Component {
                 like: true
             })
         }
+        const allComments = this.props.posts.datos.comments || [];
+        const lastFourComments = allComments.slice(-4);
+        this.setState({ lastFourComments });
     }
 
     likear(){
@@ -94,19 +98,20 @@ class Post extends Component {
               </TouchableOpacity>
             )}
       
-            {datos.comments && datos.comments.length > 0 ? (
+            {this.state.lastFourComments && this.state.lastFourComments.length > 0 ? (
               <FlatList
-                data={datos.comments}
-                keyExtractor={(comment) => comment.createdAt.toString()}
-                renderItem={({ item }) => (
+                  data={this.state.lastFourComments}
+                  keyExtractor={(comment) => comment.createdAt.toString()}
+                  renderItem={({ item }) => (
                   <Text>
                     <Text style={styles.commentAuthor}>{item.autor}:</Text> {item.commentText}
                   </Text>
-                )}
+                  )}
               />
             ) : (
               <Text>Aún no hay comentarios</Text>
-            )}
+              )
+            }
       
             <View style={styles.commentButtonContainer}>
               <TextInput
