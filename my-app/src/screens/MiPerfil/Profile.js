@@ -71,7 +71,6 @@ class Profile extends Component {
                 />
             </View>
             <Text>My posts</Text>
-            
 
             {
                 this.state.userPost.length === 0

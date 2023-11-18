@@ -1,5 +1,5 @@
-import react, { Component } from 'react';
-import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from 'react-native';
+import React, { Component } from 'react';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList, Image} from 'react-native';
 import { db, auth } from '../../firebase/Config';
 import firebase from 'firebase';
 
@@ -76,8 +76,13 @@ class PostEnProfile extends Component {
                 <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
                     <Text>Eliminar post</Text>
                 </TouchableOpacity>
-                }
-            
+            }
+            {this.props.posts.datos.fotoUrl && (
+                <Image 
+                source={{uri:this.props.posts.datos.fotoUrl}}
+                style={ styles.postImage}
+                />
+            )}
             </View>
         )
     }
@@ -96,6 +101,10 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#28a745'
     },
+    postImage: {
+        width: 100,
+        height: 100, 
+      },
 })
 
 export default PostEnProfile; 

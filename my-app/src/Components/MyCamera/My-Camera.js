@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
         
     },
     cameraBody: {
-      marginTop: 20,
-      marginBottom: 10,
-      height:"40vh",
-    },
+        marginTop: 20,
+        marginBottom: 10,
+        height: 500,
+      },
     button:{
         backgroundColor:'#28a745',
         paddingHorizontal: 10,
