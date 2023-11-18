@@ -127,14 +127,14 @@ const styles = StyleSheet.create({
         height: 500,
       },
     button:{
-        backgroundColor:'#ccc',
+        backgroundColor:'#ddd',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#ccc'
+        borderColor: '#ddd',
     },
     textButton:{
         color: '#000',

@@ -62,27 +62,34 @@ class PostEnProfile extends Component {
     
     render(){
         return(
-            <View>
-            <Text>{this.props.posts.datos.textoPost}</Text>
-            <Text>Likes: {this.state.cantidadDeLikes}</Text>
+            <View style={styles.container}>
+                <Text>{this.props.posts.datos.textoPost}</Text>
+                <Text>Likes: {this.state.cantidadDeLikes}</Text>
 
-            {this.state.like ? 
-                <TouchableOpacity onPress={()=>this.unLike()}/>
-                :
-                <TouchableOpacity onPress={()=>this.likear()}></TouchableOpacity>
-            }
-
-            {auth.currentUser.email == this.props.posts.datos.owner && 
-                <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
-                    <Text>Eliminar post</Text>
-                </TouchableOpacity>
-            }
-            {this.props.posts.datos.fotoUrl && (
-                <Image 
-                source={{uri:this.props.posts.datos.fotoUrl}}
-                style={ styles.postImage}
-                />
-            )}
+                <View style={styles.buttonContainer}>
+                    {this.state.like ? (
+                        <TouchableOpacity style={styles.likeButton} onPress={() => this.unLike()}>
+                            <Text style={styles.buttonText}>Quitar like</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity style={styles.likeButton} onPress={() => this.likear()}>
+                            <Text style={styles.buttonText}>Like</Text>
+                        </TouchableOpacity>
+                    )
+                    }
+                    {auth.currentUser.email == this.props.posts.datos.owner && 
+                        <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
+                            <Text style={styles.buttonText}>Eliminar post</Text>
+                        </TouchableOpacity>
+                    }
+                    {this.props.posts.datos.fotoUrl && (
+                        <Image 
+                            source={{uri:this.props.posts.datos.fotoUrl}}
+                            style={ styles.postImage}
+                        />
+                        )
+                    }
+                </View>
             </View>
         )
     }
@@ -91,19 +98,42 @@ class PostEnProfile extends Component {
 }
 
 const styles = StyleSheet.create({
-    button:{
-        backgroundColor:'blue',
+    container: {
+        marginVertical: 16,
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 16,
+    },
+    buttonContainer: {
+        flexDirection: 'column',
+        marginTop:8,
+    },
+    button: {
+        backgroundColor: '#ddd',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
-        borderRadius:4, 
-        borderWidth:1,
-        borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderRadius: 4,
+        borderWidth: 1,
+        marginLeft: 8,
+        borderColor: '#ddd',
+    },
+    likeButton: {
+        backgroundColor: '#87CEEB',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+        marginTop: 8,
+    },
+    buttonText: {
+        color: '#000000', // negro
     },
     postImage: {
-        width: 100,
-        height: 100, 
+        width: '100%',
+        height: 200,
+        borderRadius: 10,
+        marginBottom: 8,
       },
 })
 

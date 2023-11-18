@@ -84,8 +84,8 @@ class Profile extends Component {
                     />
             }
     
-            <TouchableOpacity onPress={()=>this.logout()}>
-                    <Text>Logout</Text>
+            <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
+                    <Text style={styles.buttonText}>Logout</Text>
             </TouchableOpacity>
 
             </View>
@@ -104,7 +104,19 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginHorizontal: 20,
         marginVertical: 5
-    }
+    },
+    button: {
+        backgroundColor: '#808080',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: 'center',
+        borderRadius: 4,
+        marginTop: 16,
+        alignSelf: 'flex-end',
+    },
+    buttonText: {
+        color: '#000000',
+    },
 })
 
 export default Profile;
