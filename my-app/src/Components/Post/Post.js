@@ -5,6 +5,7 @@ import { db, auth } from '../../firebase/Config';
 import firebase from 'firebase';
 
 
+
 class Post extends Component {
     constructor(props){
         super(props)
@@ -69,6 +70,7 @@ class Post extends Component {
         })
         .catch( e => console.log(e))
     }
+    
 
 
     render() {
@@ -100,7 +102,9 @@ class Post extends Component {
                 keyExtractor={(comment) => comment.createdAt.toString()}
                 renderItem={({ item }) => (
                   <Text>
+                    <TouchableOpacity onPress={ () => navigation.navigate('OtherProfile')}>
                     <Text style={styles.commentAuthor}>{item.autor}:</Text> {item.commentText}
+                    </TouchableOpacity>
                   </Text>
                 )}
               />
