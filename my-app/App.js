@@ -26,7 +26,7 @@ export default function App() {
           <Stack.Screen name='Home' component={Home} options={ { headerShown: false } }/>
           <Stack.Screen name='Menu' component={Menu} options={{ headerShown: false}}/>
           <Stack.Screen name= 'Profile' component={Profile} options={{ headerShown: false}} />
-          <Stack.Screen name= 'OtherProfile' component={OtherProfile} options={{ headerShown: false}} />
+          
           <Stack.Screen name= 'SearchResults' component={SearchResults} options={{ headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
