@@ -44,7 +44,7 @@ class Login extends Component {
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>Login</Text>
+                <Text style={styles.title}>Login</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
@@ -61,10 +61,10 @@ class Login extends Component {
                     value={this.state.password}
                 />
                 <TouchableOpacity style={styles.button} onPress={()=>this.login(this.state.email, this.state.password)}> {/* cuando se ejecute el to tiene que llamar al metodo login */}
-                    <Text style={styles.textButton}>Ingresar</Text>    
+                    <Text style={styles.textButton}>   Ingresar   </Text>    
                 </TouchableOpacity>
                 <TouchableOpacity onPress={ () => this.props.navigation.navigate('Registro')}>
-                   <Text>No tengo cuenta. Registrarme.</Text>
+                   <Text style={styles.textButton}>No tengo cuenta. Registrarme.</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
       },
       input: {
         height: 40,
+        width: 475,
+        alignSelf: 'center',
         paddingVertical: 10,
         paddingHorizontal: 15,
         borderWidth: 1,
@@ -86,6 +88,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
       },
       button: {
+        width: 475,
+        alignSelf: 'center',
         backgroundColor: '#ddd',
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -94,6 +98,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       textButton: {
+        width: 475,
+        alignSelf: 'center',
         color: '#000', // Negro
         fontWeight: 'bold',
       },
@@ -102,6 +108,14 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#000',
       },
+      title: {
+        textAlign: 'center',
+        fontSize: '26px',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
+    },
 })
 
 

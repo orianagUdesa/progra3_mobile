@@ -57,7 +57,7 @@ class PostForm extends Component {
                     value={this.state.textoPost}         /* falta el campo de fotoUrl pero se hace con camera  */
                     />
                 <TouchableOpacity style={styles.boton} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, this.state.fotoUrl, Date.now())}>
-                    <Text style={styles.txButton}>Postear</Text>    
+                    <Text style={styles.txButton}>  Postear  </Text>    
                 </TouchableOpacity>
             </View>
         )}}
@@ -80,6 +80,8 @@ const styles = StyleSheet.create({
     },
     input:{
         height:20,
+        width: 475,
+        alignSelf: 'center',
         paddingVertical:15,
         paddingHorizontal: 10,
         borderWidth:1,
@@ -90,6 +92,8 @@ const styles = StyleSheet.create({
     },
     boton:{
         backgroundColor:'#ccc',
+        width: 475,
+        alignSelf: 'center',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
@@ -99,10 +103,15 @@ const styles = StyleSheet.create({
         borderColor: 'ccc'
     },
     txButton:{
-        color: '#000'
+        color: '#000',
+        fontWeight: 'bold',
+        width: 475,
+        alignSelf: 'center',
     },
     camera:{
         height: 400,
+        width: 475,
+        alignContent: 'center',
     }
 
 })

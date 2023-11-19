@@ -49,7 +49,7 @@ class Register extends Component {
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>Register</Text>
+                <Text style={styles.title}>Register</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
@@ -80,7 +80,7 @@ class Register extends Component {
                     value={this.state.bio}
                 />
                 <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
-                    <Text style={styles.textButton}>Registrarse</Text>    
+                    <Text style={styles.textButton}>   Registrarse  </Text>    
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}> 
                     <Text style={styles.textButton}>Ya tengo cuenta. Ir a login</Text>
@@ -97,6 +97,8 @@ const styles = StyleSheet.create({
       },
       input: {
         height: 40,
+        width: 475,
+        alignSelf: 'center',
         paddingVertical: 10,
         paddingHorizontal: 15,
         borderWidth: 1,
@@ -105,6 +107,8 @@ const styles = StyleSheet.create({
         marginVertical: 10,
       },
       button: {
+        width: 475,
+        alignSelf: 'center',
         backgroundColor: '#ddd',
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -113,14 +117,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
       textButton: {
+        width: 475,
         color: '#000',
         fontWeight: 'bold',
+        alignSelf: 'center',
       },
       loginText: {
         marginTop: 10,
         textAlign: 'center',
         color: '#000',
       },
+      title: {
+        textAlign: 'center',
+        fontSize: '26px',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
+    },
 })
 
 

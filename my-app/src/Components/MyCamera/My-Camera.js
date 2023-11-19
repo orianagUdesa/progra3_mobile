@@ -116,7 +116,7 @@ class MyCamera extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        height:"45vh",
+        height: "50vh",
         
     },
     cameraBody: {
@@ -126,9 +126,10 @@ const styles = StyleSheet.create({
       },
     button:{
         backgroundColor:'#ddd',
+        alignItems: 'center',
+        width: 475,
         paddingHorizontal: 10,
         paddingVertical: 6,
-        textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
@@ -136,7 +137,8 @@ const styles = StyleSheet.create({
     },
     textButton:{
         color: '#000',
-        textAlign: "center"
+        alignItems: "center",
+        width: 475,
     },
     confirm:{
         flexDirection:"row",

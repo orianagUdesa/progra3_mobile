@@ -8,7 +8,7 @@ class SearchUsers extends Component {
         this.state={
             usersFiltrados:[],
             users: [],
-            usersFiltradosMail: [],
+            mailDeUsers: [],
             textoSearch: "",
             search: false,
         }
@@ -39,23 +39,16 @@ class SearchUsers extends Component {
         this.setState({
             usersFiltrados: this.state.users.filter((user)=>
                 user.data.userName.toLowerCase().includes(textoS.toLowerCase())),
-            usersFiltradosMail: this.state.users.filter((user)=>
+            mailDeUsers: this.state.users.filter((user)=>
                 user.data.owner.toLowerCase().includes(textoS.toLowerCase())),
                 search: true,
                 textoSearch: textoS,
         })
     }
 
-    /*entrarProfile(item){
-        if(item.data.email === auth.currentUser.email){
-            this.props.navigation.navigate('Profile')
-        } else {
-            this.props.navigation.navigate('OtherProfile')
-        }
-    }*/
+    //tenemos que hacer que se elimine el historial una vez que completamos el campo, actualizamos los valores
 
     render(){
-        console.log(this.state.usersFiltrados)
         return(
             <View style={styles.mainContainer}>
                 <Text style= {styles.title}>Buscador</Text>
@@ -68,7 +61,7 @@ class SearchUsers extends Component {
                 </TextInput>
 
                 {
-                    this.state.usersFiltrados.length === 0 && this.state.search === true && this.state.usersFiltradosMail.length === 0 ?
+                    this.state.usersFiltrados.length === 0 && this.state.search === true && this.state.mailDeUsers.length === 0 ?
                     (<Text> No hay resultados que coincidan</Text>)
                     : (
                     <FlatList
@@ -85,7 +78,7 @@ class SearchUsers extends Component {
                         </TouchableOpacity>)}
                     />,
                     <FlatList
-                    data= {this.state.usersFiltradosMail}
+                    data= {this.state.mailDeUsers}
                     keyExtractor={user => user.id.toString()}
                     renderItem={({item}) => (
                         <TouchableOpacity onPress={() =>
@@ -114,6 +107,8 @@ const styles= StyleSheet.create({
     },
     input:{
         height:20,
+        width: 475,
+        alignSelf: 'center',
         paddingVertical:15,
         paddingHorizontal: 10,
         borderWidth:1,

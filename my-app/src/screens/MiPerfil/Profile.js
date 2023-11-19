@@ -70,7 +70,7 @@ class Profile extends Component {
                     renderItem={ ({item}) => <Text>Username: {item.data.userName}</Text> }
                 />
             </View>
-            <Text>My posts</Text>
+            <Text style={styles.textPost}>My posts</Text>
 
             {
                 this.state.userPost.length === 0
@@ -121,6 +121,11 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#000000',
     },
+    textPost: {
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 15,
+    }
 })
 
 export default Profile;
