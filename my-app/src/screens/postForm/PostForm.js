@@ -47,7 +47,7 @@ class PostForm extends Component {
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>New Post</Text>
+                <Text style={styles.title}>New Post</Text>
                 <MyCamera style={styles.camera} traerUrlDeFoto = {url => this.traerUrlDeFoto(url)}/> 
                 <TextInput
                     style={styles.input}
@@ -66,6 +66,14 @@ class PostForm extends Component {
 
 
 const styles = StyleSheet.create({
+    title: {
+        textAlign: 'center',
+        fontSize: '26px',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
+    },
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,

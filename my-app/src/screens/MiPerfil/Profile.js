@@ -97,7 +97,11 @@ class Profile extends Component {
 const styles = StyleSheet.create({
     title: {
         textAlign: 'center',
-        fontSize: 'medium',
+        fontSize: '26px',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
     },
     contenedorPrin: {
         flex: 1,

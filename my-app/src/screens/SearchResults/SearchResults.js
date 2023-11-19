@@ -2,33 +2,33 @@ import React, { Component } from "react";
 import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from 'react-native';
 import { db, auth } from '../../firebase/Config';
 
-class SearchResults extends Component {
+class SearchUsers extends Component {
     constructor(props){
         super(props)
         this.state={
             usersFiltrados:[],
             users: [],
-            textoSearch: '',
+            usersFiltradosMail: [],
+            textoSearch: "",
             search: false,
         }
     }
     //Nos guardamos la informacion de todos los usuarios en dbUsers, y despues lo pasamos al state
     componentDidMount(){
         db.collection('users').onSnapshot(
-            users => {
+            (res) => {
                 let dbUsers = [];
 
-                users.forEach( user => {
+                res.forEach( (user) => {
                     dbUsers.push(
                         {
                             id: user.id,
-                            datos: user.data()
+                            data: user.data()
                         }
                     )
-                })
-
+                });
                 this.setState({
-                    users: dbUsers
+                    users: dbUsers,
                 })
             }
         )
@@ -36,49 +36,66 @@ class SearchResults extends Component {
 
     //Vaya buscando palabra por palabra y encontrar los datos que coincidan con la palabra. De usuarios//
     buscarResultados(textoS){
-        if (textoS === ''){
-            this.setState({
-                usersFiltrados: [],
-                textoSearch: '',
-                search: false
-            })
-        } else {
-            let buscarResultados = this.state.users.filter((user)=> user.datos.email.toLowerCase().includes(textoS.toLowerCase()))
-            this.setState({
-                usersFiltrados: buscarResultados,
+        this.setState({
+            usersFiltrados: this.state.users.filter((user)=>
+                user.data.userName.toLowerCase().includes(textoS.toLowerCase())),
+            usersFiltradosMail: this.state.users.filter((user)=>
+                user.data.owner.toLowerCase().includes(textoS.toLowerCase())),
+                search: true,
                 textoSearch: textoS,
-                search: true
-            })
-        }
+        })
     }
 
-    entrarProfile(item){
-        if(item.datos.email === auth.currentUser.email){
+    /*entrarProfile(item){
+        if(item.data.email === auth.currentUser.email){
             this.props.navigation.navigate('Profile')
         } else {
             this.props.navigation.navigate('OtherProfile')
         }
-    }
+    }*/
 
     render(){
+        console.log(this.state.usersFiltrados)
         return(
-            <View>
-                <Text>Resultados</Text>
+            <View style={styles.mainContainer}>
+                <Text style= {styles.title}>Buscador</Text>
                 <TextInput
-                    onChangeText={textoS => this.buscarResultados(textoS)}
-                    placeholder='Search user'
+                    style={styles.input}
+                    placeholder='Busca al usuario que desees'
                     keyboardType='default'
+                    onChangeText={textoS => this.buscarResultados(textoS)}
                     value={this.state.textoSearch}>
                 </TextInput>
 
                 {
-                    this.state.usersFiltrados.length === 0 && this.state.search === true ?
-                    <Text> No hay resultados que coincidan</Text>
-                    :
+                    this.state.usersFiltrados.length === 0 && this.state.search === true && this.state.usersFiltradosMail.length === 0 ?
+                    (<Text> No hay resultados que coincidan</Text>)
+                    : (
                     <FlatList
-                    info = {this.state.usersFiltrados}
+                    data= {this.state.usersFiltrados}
                     keyExtractor= {user => user.id.toString()}
-                    renderItem= {({item}) => <Text onPress={()=> this.entrarProfile(item)}>{item.datos.email}</Text>}/>
+                    renderItem= {({item}) =>(
+                        <TouchableOpacity
+                            onPress={() =>
+                                this.props.navigation.navigate('Profile', {mail: item.data.owner })} >
+                        <View>
+                        <Text>Nombre de usuario:</Text>
+                        <Text>{item.data.userName}</Text>
+                        </View>
+                        </TouchableOpacity>)}
+                    />,
+                    <FlatList
+                    data= {this.state.usersFiltradosMail}
+                    keyExtractor={user => user.id.toString()}
+                    renderItem={({item}) => (
+                        <TouchableOpacity onPress={() =>
+                            this.props.navigation.navigate('Profile', { mail: item.data.owner })}>
+                        <View>
+                        <Text>Email:</Text>
+                        <Text>{item.data.owner}</Text>
+                        </View>
+                        </TouchableOpacity>)}
+                    />)
                 }
             </View>
         )
@@ -86,5 +103,34 @@ class SearchResults extends Component {
 
 }
 
+const styles= StyleSheet.create({
+    title: {
+        textAlign: 'center',
+        fontSize: '26px',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        color: '#333',
+    },
+    input:{
+        height:20,
+        paddingVertical:15,
+        paddingHorizontal: 10,
+        borderWidth:1,
+        borderColor: '#ccc',
+        borderStyle: 'solid',
+        borderRadius: 6,
+        marginVertical:10,
+    },
+    mainContainer: {
+        flex: 1,
+        borderRadius: 6,
+        marginHorizontal: 20,
+        marginVertical: 5,
+        flex: 1,
+        backgroundColor: '#F7F7F7',
+        padding: 20,
+    },
+})
 
-export default SearchResults;
+export default SearchUsers;
