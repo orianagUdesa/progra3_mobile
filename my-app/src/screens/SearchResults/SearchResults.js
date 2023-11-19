@@ -8,16 +8,17 @@ class SearchResults extends Component {
         this.state={
             usersFiltrados:[],
             users: [],
-            textoSearch: ''
+            textoSearch: '',
+            search: false,
         }
     }
-
+    //Nos guardamos la informacion de todos los usuarios en dbUsers, y despues lo pasamos al state
     componentDidMount(){
         db.collection('users').onSnapshot(
-            usuarios => {
+            users => {
                 let dbUsers = [];
 
-                usuarios.forEach( user => {
+                users.forEach( user => {
                     dbUsers.push(
                         {
                             id: user.id,
@@ -33,50 +34,52 @@ class SearchResults extends Component {
         )
     }
 
-    /*buscarResultados(textoSearch){
-        this.state.todosUsers.forEach( user => {
-            if (textoSearch.length==0){
-                this.setState({
-                    usersFiltrados: []
-                })
-            } else if (user.datos.owner.includes(textoSearch)){
-                if(this.state.usersFiltrados.includes(user))
-                {null}
-                else{this.state.usersFiltrados.push(user)}
-            }
-        })
-    }*/
-
-    buscarResultados(textoSearch){
-        let listaNueva = []
-        for (let i = 0; i < this.state.users.length; i++) {
-            if (this.state.users[i].datos.owner.includes(textoSearch) ) {
-                // IF Para no duplicar usuarios en resultados:
-                if(this.state.usersFiltrados.includes(this.state.users[i]))
-                {null}
-                else{listaNueva.push(this.state.users[i])}
-            }
-            if (textoSearch.length==0){
-                nuevaLista = []
-            }
+    //Vaya buscando palabra por palabra y encontrar los datos que coincidan con la palabra. De usuarios//
+    buscarResultados(textoS){
+        if (textoS === ''){
+            this.setState({
+                usersFiltrados: [],
+                textoSearch: '',
+                search: false
+            })
+        } else {
+            let buscarResultados = this.state.users.filter((user)=> user.datos.email.toLowerCase().includes(textoS.toLowerCase()))
+            this.setState({
+                usersFiltrados: buscarResultados,
+                textoSearch: textoS,
+                search: true
+            })
         }
-        this.setState({
-            usersFiltrados: listaNueva
-        })
     }
 
+    entrarProfile(item){
+        if(item.datos.email === auth.currentUser.email){
+            this.props.navigation.navigate('Profile')
+        } else {
+            this.props.navigation.navigate('OtherProfile')
+        }
+    }
 
     render(){
         return(
             <View>
                 <Text>Resultados</Text>
                 <TextInput
-                    onChangeText={(text)=> (this.buscarResultados(text), this.setState({textoSearch: text}))}
+                    onChangeText={textoS => this.buscarResultados(textoS)}
                     placeholder='Search user'
                     keyboardType='default'
                     value={this.state.textoSearch}>
                 </TextInput>
 
+                {
+                    this.state.usersFiltrados.length === 0 && this.state.search === true ?
+                    <Text> No hay resultados que coincidan</Text>
+                    :
+                    <FlatList
+                    info = {this.state.usersFiltrados}
+                    keyExtractor= {user => user.id.toString()}
+                    renderItem= {({item}) => <Text onPress={()=> this.entrarProfile(item)}>{item.datos.email}</Text>}/>
+                }
             </View>
         )
     }
