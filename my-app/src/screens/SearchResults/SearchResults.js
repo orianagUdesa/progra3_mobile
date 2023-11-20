@@ -82,7 +82,7 @@ class SearchUsers extends Component {
                     keyExtractor={user => user.id.toString()}
                     renderItem={({item}) => (
                         <TouchableOpacity onPress={() =>
-                            this.props.navigation.navigate('Profile', { mail: item.data.owner })}>
+                            this.props.navigation.navigate('OtherProfile', { mail: item.data.owner })}>
                         <View>
                         <Text>Email:</Text>
                         <Text>{item.data.owner}</Text>
